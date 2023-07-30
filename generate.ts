@@ -29,6 +29,8 @@ const POLLY_PRESETS_ES: Partial<SynthesizeSpeechCommandInput> = {
   LanguageCode: "es-US",
 };
 
+const SILENCE = "silence.ogg";
+
 const run = async () => {
   // clear out old files
   await fs.ensureDir("./pods");
@@ -55,7 +57,10 @@ const run = async () => {
     console.log(`Generating audio for "${title}"...`);
 
     // identify phrase language
-    const phrases: ["en" | "es", string][] = [["en", title]];
+    const phrases: ["en" | "es", string][] = [
+      ["en", title],
+      ["en", "Now it's time for a quiz! Say the following phrases in Spanish:"],
+    ];
     for (const [es, en] of set) {
       phrases.push(["es", es]);
       phrases.push(["en", en]);
@@ -94,20 +99,25 @@ const run = async () => {
 
     // stitch audio clips together
     const titlePath = clipPaths.shift() as string;
+    const quizPath = clipPaths.shift() as string;
 
-    const fileList = [titlePath, "silence.ogg"]
+    const clipPairs = clipPaths.reduce((a, b, c) => {
+      if (c % 2 === 1) {
+        const d = a.pop() ?? [];
+        a.push([d[0], b]);
+      } else {
+        a.push([b]);
+      }
+      return a;
+    }, [] as string[][]);
+
+    const fileList = [titlePath, SILENCE]
+      .concat(...clipPairs.map(([es, en]) => [en, es, es, en, es, es, SILENCE]))
+      .concat([quizPath, SILENCE])
       .concat(
-        ...clipPaths
-          .reduce((a, b, c) => {
-            if (c % 2 === 1) {
-              const d = a.pop() ?? [];
-              a.push([d[0], b]);
-            } else {
-              a.push([b]);
-            }
-            return a;
-          }, [] as string[][])
-          .map(([es, en]) => [en, es, es, en, es, es, "silence.ogg"])
+        ...shuffle(clipPairs)
+          .slice(0, 7)
+          .map(([es, en]) => [en, SILENCE, SILENCE, es, SILENCE])
       )
       .map((path) => `file '${path?.split("/").pop()}'`)
       .join("\n");
@@ -121,5 +131,16 @@ const run = async () => {
     );
   }
 };
+
+function shuffle(original: any[]) {
+  const array = [...original];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
 
 run();
