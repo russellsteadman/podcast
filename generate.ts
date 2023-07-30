@@ -41,6 +41,7 @@ const run = async () => {
         .map((file) => fs.remove(`./pods/${file}`))
     );
   });
+  await fs.copyFile("./silence.ogg", "./sound-temp/silence.ogg");
 
   // get all pod files
   const pods = await fs.readdir("./pods");
@@ -69,7 +70,7 @@ const run = async () => {
         ...(lang === "en" ? POLLY_PRESETS_EN : POLLY_PRESETS_ES),
         Text:
           lang === "en"
-            ? `<speak>${text}<break /></speak>`
+            ? `<speak>${text}<break /><break /></speak>`
             : `<speak><prosody rate="x-slow">${text}</prosody><break /></speak>`,
       } as SynthesizeSpeechCommandInput;
       requests.push(
@@ -92,21 +93,22 @@ const run = async () => {
     }
 
     // stitch audio clips together
-    const titlePath = clipPaths.shift();
+    const titlePath = clipPaths.shift() as string;
 
-    const fileList = [
-      titlePath,
-      ...clipPaths.reduce((a, b, c) => {
-        const prev = c % 2 === 1 ? a.pop() : undefined;
-        if (prev) a.pop();
-        a.push(b);
-        if (prev) a.push(prev);
-        a.push(b);
-        if (prev) a.push(prev);
-        a.push(b);
-        return a;
-      }, [] as string[]),
-    ]
+    const fileList = [titlePath, "silence.ogg"]
+      .concat(
+        ...clipPaths
+          .reduce((a, b, c) => {
+            if (c % 2 === 1) {
+              const d = a.pop() ?? [];
+              a.push([d[0], b]);
+            } else {
+              a.push([b]);
+            }
+            return a;
+          }, [] as string[][])
+          .map(([es, en]) => [en, es, es, en, es, es, "silence.ogg"])
+      )
       .map((path) => `file '${path?.split("/").pop()}'`)
       .join("\n");
 
@@ -115,7 +117,7 @@ const run = async () => {
 
     const outputPath = `./pods/${pod.replace(".json", "")}.ogg`;
     await exec(
-      `${ffmpegPath} -f concat -i ${listFile} -c libvorbis -filter:a "atempo=0.75" ${outputPath}`
+      `${ffmpegPath} -f concat -i ${listFile} -c libvorbis -filter:a "atempo=0.7" ${outputPath}`
     );
   }
 };
