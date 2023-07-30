@@ -1,0 +1,147 @@
+{
+  "$schema": "../pods-schema.json",
+  "title": "Conversation Starters",
+  "set": [
+    ["Hola, ¿cómo estás?", "Hi, how are you?"],
+    ["¡Buenos días! ¿Cómo te va?", "Good morning! How's it going?"],
+    ["¿Qué has hecho hoy?", "What have you done today?"],
+    [
+      "¿Qué planes tienes para el fin de semana?",
+      "What are your plans for the weekend?"
+    ],
+    ["¿Has estado en este lugar antes?", "Have you been to this place before?"],
+    ["¿Te gusta viajar?", "Do you like to travel?"],
+    [
+      "¿Qué tipo de música o películas o libros te gusta?",
+      "What kind of music or movies or books do you like?"
+    ],
+    ["¿Cuál es tu comida favorita?", "What is your favorite food?"],
+    ["¿Tienes hermanos o hermanas?", "Do you have any siblings?"],
+    ["¿A qué te dedicas?", "What do you do for a living?"],
+    ["¿Estudias o trabajas?", "Are you a student or do you work?"],
+    ["¿Cómo te fue en tu día?", "How was your day?"],
+    ["¿Qué te trae por aquí?", "What brings you here?"],
+    ["¿Qué opinas sobre?", "What do you think about X Y Z?"],
+    ["¿Tienes alguna mascota?", "Do you have any pets?"],
+    [
+      "¿Cuál es tu lugar favorito para relajarte?",
+      "What's your favorite place to relax?"
+    ],
+    [
+      "¿Cuál es el último libro que has leído?",
+      "What's the last book you've read?"
+    ],
+    [
+      "¿Qué actividades te gustan para hacer en tu tiempo libre?",
+      "What activities do you like to do in your free time?"
+    ],
+    ["¿Cuál es tu deporte favorito?", "What is your favorite sport?"],
+    [
+      "¿Has visto alguna buena película últimamente?",
+      "Have you seen any good movies lately?"
+    ],
+    [
+      "¿Cuál fue la última película que te hizo llorar o reír?",
+      "What was the last movie that made you cry o laugh?"
+    ],
+    [
+      "¿Cuál es tu recuerdo más preciado?",
+      "What is your most cherished memory?"
+    ],
+    [
+      "¿Te gustaría viajar a algún lugar en particular?",
+      "Would you like to travel to any specific place?"
+    ],
+    [
+      "¿Has probado la comida local de este lugar?",
+      "Have you tried the local food of this place?"
+    ],
+    ["¿Qué te inspira en la vida?", "What inspires you in life?"],
+    [
+      "¿Tienes algún sueño que te gustaría cumplir?",
+      "Do you have any dreams you'd like to fulfill?"
+    ],
+    ["¿Qué te hace feliz?", "What makes you happy?"],
+    ["¿Qué te parece este clima?", "What do you think about this weather?"],
+    ["¿Cuál es tu estación del año favorita?", "What is your favorite season?"],
+    [
+      "¿Eres más de playa o montaña?",
+      "Are you more of a beach or mountain person?"
+    ],
+    [
+      "¿Has asistido a algún concierto/evento recientemente?",
+      "Have you attended any concerts/events recently?"
+    ],
+    ["¿Cuál es tu pasatiempo favorito?", "What is your favorite hobby?"],
+    [
+      "¿Qué te gustaría aprender a hacer?",
+      "What would you like to learn to do?"
+    ],
+    ["¿Cómo conociste a Russell?", "How did you meet Russell?"],
+    [
+      "¿Qué te trae interés en aprender español?",
+      "What got you interested in learning Spanish?"
+    ],
+    [
+      "¿Has probado la comida típica de este país?",
+      "Have you tried the typical food of this country?"
+    ],
+    ["¿Qué te hace reír?", "What makes you laugh?"],
+    [
+      "¿Has viajado a algún país de habla hispana?",
+      "Have you traveled to any Spanish-speaking countries?"
+    ],
+    [
+      "¿Cuál es tu lugar ideal para unas vacaciones?",
+      "What's your ideal vacation spot?"
+    ],
+    ["¿Qué te parece este lugar?", "What do you think about this place?"],
+    [
+      "¿Cuál es tu programa de televisión favorito?",
+      "What is your favorite TV show?"
+    ],
+    [
+      "¿Cuál es el mejor consejo que has recibido?",
+      "What's the best advice you've ever received?"
+    ],
+    [
+      "¿Has practicado algún deporte extremo?",
+      "Have you tried any extreme sports?"
+    ],
+    [
+      "¿Qué te motiva a levantarte por las mañanas?",
+      "What motivates you to get up in the mornings?"
+    ],
+    ["¿Cuál es tu meta para este año?", "What is your goal for this year?"],
+    [
+      "¿Qué te gustaría cambiar en el mundo?",
+      "What would you like to change in the world?"
+    ],
+    [
+      "¿Cuál es tu lugar favorito de tu ciudad natal?",
+      "What's your favorite place in your hometown?"
+    ],
+    ["¿Has conocido a alguien famoso?", "Have you met anyone famous?"],
+    [
+      "¿Qué te gusta hacer en tu cumpleaños?",
+      "What do you like to do on your birthday?"
+    ],
+    [
+      "¿Cuál es la mejor película que has visto?",
+      "What's the best movie you've ever watched?"
+    ],
+    [
+      "¿Tienes alguna canción que te haga sentir nostálgico?",
+      "Do you have a song that makes you feel nostalgic?"
+    ],
+    ["¿Cómo te mantienes en forma?", "How do you stay in shape?"],
+    [
+      "¿Cuál es tu destino de viaje soñado?",
+      "What's your dream travel destination?"
+    ],
+    [
+      "¿Qué te hace sentir agradecido(a) hoy?",
+      "What are you grateful for today?"
+    ]
+  ]
+}

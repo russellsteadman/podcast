@@ -14,7 +14,7 @@ const polly = new PollyClient({});
 
 const POLLY_PRESETS: Partial<SynthesizeSpeechCommandInput> = {
   OutputFormat: "ogg_vorbis",
-  TextType: "text",
+  TextType: "ssml",
   Engine: "neural",
   SampleRate: "24000",
 };
@@ -30,6 +30,7 @@ const POLLY_PRESETS_ES: Partial<SynthesizeSpeechCommandInput> = {
 };
 
 const run = async () => {
+  // clear out old files
   await fs.ensureDir("./pods");
   await fs.ensureDir("./sound-temp");
   await fs.emptyDir("./sound-temp");
@@ -41,6 +42,7 @@ const run = async () => {
     );
   });
 
+  // get all pod files
   const pods = await fs.readdir("./pods");
 
   // read in all json pods
@@ -51,18 +53,24 @@ const run = async () => {
 
     console.log(`Generating audio for "${title}"...`);
 
+    // identify phrase language
     const phrases: ["en" | "es", string][] = [["en", title]];
     for (const [es, en] of set) {
       phrases.push(["es", es]);
       phrases.push(["en", en]);
     }
 
+    // generate audio clips
     const requests: Promise<Uint8Array>[] = [];
-    for (const [lang, text] of phrases) {
+    for (const [i, [lang, text]] of phrases.entries()) {
+      if (i % 8 === 7) await new Promise((r) => setTimeout(r, 1000));
       const params = {
         ...POLLY_PRESETS,
         ...(lang === "en" ? POLLY_PRESETS_EN : POLLY_PRESETS_ES),
-        Text: text,
+        Text:
+          lang === "en"
+            ? `<speak>${text}<break /></speak>`
+            : `<speak><prosody rate="x-slow">${text}</prosody><break /></speak>`,
       } as SynthesizeSpeechCommandInput;
       requests.push(
         polly.send(new SynthesizeSpeechCommand(params)).then((res) => {
@@ -75,6 +83,7 @@ const run = async () => {
 
     const clips = await Promise.all(requests);
 
+    // write audio clips to disk
     const clipPaths: string[] = [];
     for (const [i, [lang, text]] of phrases.entries()) {
       const clipPath = `./sound-temp/${uuid()}.ogg`;
@@ -82,12 +91,16 @@ const run = async () => {
       clipPaths.push(clipPath);
     }
 
+    // stitch audio clips together
     const titlePath = clipPaths.shift();
 
     const fileList = [
       titlePath,
       ...clipPaths.reduce((a, b, c) => {
         const prev = c % 2 === 1 ? a.pop() : undefined;
+        if (prev) a.pop();
+        a.push(b);
+        if (prev) a.push(prev);
         a.push(b);
         if (prev) a.push(prev);
         a.push(b);
@@ -102,11 +115,9 @@ const run = async () => {
 
     const outputPath = `./pods/${pod.replace(".json", "")}.ogg`;
     await exec(
-      `${ffmpegPath} -f concat -i ${listFile} -c libvorbis -filter:a "atempo=0.5" ${outputPath}`
+      `${ffmpegPath} -f concat -i ${listFile} -c libvorbis -filter:a "atempo=0.75" ${outputPath}`
     );
   }
 };
 
 run();
-
-//
