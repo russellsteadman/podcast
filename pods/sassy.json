@@ -1,0 +1,93 @@
+{
+  "$schema": "../pods-schema.json",
+  "title": "Sassy Phrases in Spanish",
+  "set": [
+    [
+      "La vida es bella, pero la mía es mejor.",
+      "Life is beautiful, but mine is better."
+    ],
+    [
+      "No soy perfecto, pero estoy tan cerca que poco importa.",
+      "I'm not perfect, but I'm so close that it doesn't matter."
+    ],
+    [
+      "No estoy de acuerdo contigo, pero no importa, estoy acostumbrado.",
+      "I disagree with you, but it's okay, I'm used to it."
+    ],
+    [
+      "Tú crees que me conoces, pero no tienes ni idea.",
+      "You think you know me, but you have no idea."
+    ],
+    [
+      "No estoy de mal humor, es solo mi personalidad.",
+      "I'm not in a bad mood, it's just my personality."
+    ],
+    [
+      "Si estás hablando a mis espaldas, es porque estás en la posición correcta para besar mi trasero.",
+      "If you're talking behind my back, then you're in the right place to kiss my ass."
+    ],
+    [
+      "No estoy loco, simplemente soy especial.",
+      "I'm not crazy, I'm just special."
+    ],
+    [
+      "No te estoy juzgando, ya te estoy juzgando.",
+      "I'm not judging you, I'm already judging."
+    ],
+    [
+      "Estoy demasiado ocupado siendo una leyenda como para preocuparme por lo que piensas.",
+      "I'm too busy being a legend to worry about what you think."
+    ],
+    [
+      "¿Crees que hablo mucho? Bueno, aún tengo mucho más que decir.",
+      "You think I talk too much? Well, I have a lot more to say."
+    ],
+    ["No soy malo, simplemente soy honesto.", "I'm not mean, I'm just honest."],
+    [
+      "Estoy demasiado ocupado teniendo éxito como para perder mi tiempo con idiotas.",
+      "I'm too busy succeeding to waste my time with idiots."
+    ],
+    [
+      "No te digo que me odies, pero es una opción.",
+      "I'm not telling you to hate me, but it's an option."
+    ],
+    [
+      "No tengo ataques de ira, simplemente tengo sesiones intensas de expresión.",
+      "I don't have temper tantrums, I just have intense expression sessions."
+    ],
+    [
+      "No, no estoy llorando, solo tengo una rebeldía de polvo en el ojo.",
+      "No, I'm not crying, I just have a rebellious dust in my eye."
+    ],
+    ["No soy una princesa, soy una reina.", "I'm not a princess, I'm a queen."],
+    [
+      "Hablo español como una vaca en patineta, pero al menos lo intento.",
+      "I speak Spanish like a cow on a skateboard, but at least I'm trying."
+    ],
+    [
+      "No estoy de humor para ser educado hoy.",
+      "I'm not in the mood to be polite today."
+    ],
+    [
+      "No soy sarcástico, simplemente tengo un ingenio agudo.",
+      "I'm not sarcastic, I'm just blessed with a sharp mind."
+    ],
+    [
+      "No me mires así, tengo poderes mágicos para hacerte desaparecer.",
+      "Don't look at me like that, I have magical powers to make you disappear."
+    ],
+    [
+      "Crees que eres gracioso, pero he visto cosas mejores en una caja de cereales.",
+      "You think you're funny, but I've seen better on a cereal box."
+    ],
+    ["No soy viejo, soy vintage.", "I'm not old, I'm vintage."],
+    [
+      "No soy una persona mañanera, ni tampoco a mediodía.",
+      "I'm not a morning person, or a midday one either."
+    ],
+    [
+      "No te estoy ignorando, simplemente te estoy dando una lección de paciencia.",
+      "I'm not ignoring you, I'm giving you a lesson in patience."
+    ]
+  ]
+}

@@ -39,14 +39,16 @@ const run = async () => {
   await fs.readdir("./pods").then((files) => {
     return Promise.all(
       files
-        .filter((file) => file.endsWith(".ogg"))
+        .filter((file) => file.endsWith(".ogg") || file.endsWith(".mp3"))
         .map((file) => fs.remove(`./pods/${file}`))
     );
   });
   await fs.copyFile("./silence.ogg", "./sound-temp/silence.ogg");
 
   // get all pod files
-  const pods = await fs.readdir("./pods");
+  const pods = (await fs.readdir("./pods")).filter(
+    (file) => file.indexOf("ignore") === -1
+  );
 
   // read in all json pods
   for (const pod of pods) {

@@ -2,3 +2,4 @@ node_modules
 dist
 sound-temp
 pods/*.ogg
+pods/*.mp3
