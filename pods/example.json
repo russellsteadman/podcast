@@ -1,0 +1,5 @@
+{
+  "$schema": "../pods-schema.json",
+  "title": "The Big Combo",
+  "set": [["Hola", "Hello"]]
+}
