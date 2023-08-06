@@ -8,7 +8,5 @@
       "dynamicImport": false
     }
   },
-  "module": {
-    "type": "commonjs"
-  }
+  "sourceMaps": true
 }

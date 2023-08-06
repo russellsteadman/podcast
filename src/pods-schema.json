@@ -1,0 +1,63 @@
+{
+  "$id": "https://russell.run/poddlev1",
+  "title": "Podcast Episode",
+  "description": "A podcast episode",
+  "type": "object",
+  "properties": {
+    "title": {
+      "description": "The title of the episode",
+      "type": "string"
+    },
+    "set": {
+      "description": "An array of spanish english word pairs",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 1
+    },
+    "lang": {
+      "description": "The language being learned",
+      "type": "string",
+      "enum": [
+        "en-US",
+        "es-US",
+        "es-MX",
+        "es-ES",
+        "fr-FR",
+        "de-DE",
+        "it-IT",
+        "pt-BR",
+        "ja-JP",
+        "ko-KR",
+        "yue-CN",
+        "cmn-CN"
+      ]
+    },
+    "hostLang": {
+      "description": "The known language for prompting the user",
+      "default": "en-US",
+      "type": "string",
+      "enum": [
+        "en-US",
+        "es-US",
+        "es-MX",
+        "es-ES",
+        "fr-FR",
+        "de-DE",
+        "it-IT",
+        "pt-BR",
+        "ja-JP",
+        "ko-KR",
+        "zh-CN",
+        "zh-TW"
+      ]
+    }
+  },
+  "required": ["title", "set", "lang"]
+}
