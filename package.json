@@ -1,12 +1,13 @@
 {
   "name": "poddle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A language podcast generator for the command line",
   "scripts": {
     "start": "node bin/poddle.js",
     "prestart": "npm run build",
     "build": "swc build ./src --out-dir bin --source-maps --copy-files && tsc",
-    "prebuild": "rimraf bin"
+    "prebuild": "rimraf bin",
+    "prepublishOnly": "npm run build"
   },
   "type": "module",
   "homepage": "https://github.com/russellsteadman/poddle#readme",
