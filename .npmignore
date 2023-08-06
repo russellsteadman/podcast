@@ -1,6 +1,6 @@
 node_modules
 dist
 sound-temp
+**/sound-temp
 **/pods/*.ogg
 **/pods/*.mp3
-bin

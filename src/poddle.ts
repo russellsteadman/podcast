@@ -3,7 +3,7 @@ import {
   SynthesizeSpeechCommandInput,
   SynthesizeSpeechCommand,
 } from '@aws-sdk/client-polly';
-import { readdir as readDir, writeFile } from 'fs/promises';
+import { writeFile } from 'fs/promises';
 import { ensureDir, emptyDir, copy as copyFile, readJSON } from 'fs-extra/esm';
 import ffmpegPath from 'ffmpeg-static';
 import { v4 as uuid } from 'uuid';
@@ -13,6 +13,7 @@ import { join, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 import { program } from 'commander';
 import inquirer from 'inquirer';
+import open from 'open';
 
 const exec = promisify(execCallback);
 const polly = new PollyClient({});
@@ -51,6 +52,12 @@ const POLLY_VOICES = {
   'cmn-CN': ['Zhiyu'],
 };
 
+const pascalCase = (str: string) =>
+  str
+    .split(' ')
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(' ');
+
 const here = (path: string) =>
   join(dirname(fileURLToPath(import.meta.url)), path);
 const there = (path: string) => join(process.cwd(), path);
@@ -77,9 +84,9 @@ program
   .command('create')
   .description('Create a podcast from a JSON file')
   .argument('<file>', 'JSON file of podcast')
-  // .option('--first', 'display just the first substring')
-  // .option('-s, --separator <char>', 'separator character', ',')
-  .action(async (file, options) => {
+  .option('-H, --host <speaker>', 'The name of the AWS Polly host speaker')
+  .option('-G, --guest <speaker>', 'The name of the AWS Polly guest speaker')
+  .action(async (file, options: { host?: string; guest?: string }) => {
     // clear out old files
     await ensureDir(here('sound-temp'));
     await emptyDir(here('sound-temp'));
@@ -93,6 +100,79 @@ program
       hostLang: string;
     } = await readJSON(there(file));
     const { title, set, lang, hostLang } = podData;
+
+    // convert host and guest to pascal case if provided
+    if (options.host) options.host = pascalCase(options.host);
+    if (options.guest) options.guest = pascalCase(options.guest);
+
+    // validate speaker names if provided
+    if (
+      options.host &&
+      !POLLY_VOICES[
+        (hostLang ?? 'en-US') as keyof typeof POLLY_VOICES
+      ].includes(options.host)
+    ) {
+      console.error(`No speaker named "${options.host}" for ${hostLang}`);
+      process.exit(1);
+    } else if (
+      options.guest &&
+      !POLLY_VOICES[lang as keyof typeof POLLY_VOICES].includes(options.guest)
+    ) {
+      console.error(`No speaker named "${options.guest}" for ${lang}`);
+      process.exit(1);
+    }
+
+    // if no speakers provided, ask if they want to open the documentation url
+    if (!options.host || !options.guest) {
+      const { shouldOpen } = await inquirer.prompt([
+        {
+          type: 'confirm',
+          name: 'shouldOpen',
+          message: `Would you like to learn more about speaker voice options?`,
+        },
+      ]);
+      if (shouldOpen) {
+        await open(
+          'https://docs.aws.amazon.com/polly/latest/dg/voicelist.html',
+        );
+      }
+    }
+
+    // ask for speaker names if not provided
+    if (!options.host) {
+      const choices =
+        POLLY_VOICES[(hostLang ?? 'en-US') as keyof typeof POLLY_VOICES];
+      if (choices.length === 1) {
+        options.host = choices[0];
+      } else {
+        const { host } = await inquirer.prompt([
+          {
+            type: 'list',
+            name: 'host',
+            message: `Who should be the ${hostLang ?? 'en-US'} speaker?`,
+            choices,
+          },
+        ]);
+        options.host = host;
+      }
+    }
+
+    if (!options.guest) {
+      const choices = POLLY_VOICES[lang as keyof typeof POLLY_VOICES];
+      if (choices.length === 1) {
+        options.guest = choices[0];
+      } else {
+        const { guest } = await inquirer.prompt([
+          {
+            type: 'list',
+            name: 'guest',
+            message: `Who should be the ${lang} speaker?`,
+            choices,
+          },
+        ]);
+        options.guest = guest;
+      }
+    }
 
     console.log(`Generating audio for "${title}"...`);
 
