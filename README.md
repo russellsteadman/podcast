@@ -40,4 +40,4 @@ Options:
 
 ## License
 
-&copy; 2023 [MIT](./LICENSE) Russell Steadman
+&copy; 2023 [MIT](https://github.com/russellsteadman/poddle/blob/main/LICENSE) Russell Steadman
