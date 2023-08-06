@@ -197,13 +197,16 @@ program
         ...(isHostLang
           ? {
               VoiceId:
+                options.host ??
                 POLLY_VOICES[
                   (hostLang ?? 'en-US') as keyof typeof POLLY_VOICES
                 ][0],
               LanguageCode: hostLang ?? 'en-US',
             }
           : {
-              VoiceId: POLLY_VOICES[lang as keyof typeof POLLY_VOICES][0],
+              VoiceId:
+                options.guest ??
+                POLLY_VOICES[lang as keyof typeof POLLY_VOICES][0],
               LanguageCode: lang,
             }),
         Text: isHostLang

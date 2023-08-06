@@ -1,6 +1,6 @@
 {
   "name": "poddle",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A language podcast generator for the command line",
   "scripts": {
     "start": "node bin/poddle.js",
