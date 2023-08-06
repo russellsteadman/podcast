@@ -265,4 +265,26 @@ program
     console.log(`Podcast "${title}" saved to "${outputPath}"`);
   });
 
+program
+  .command('new')
+  .description('Get a template for a new podcast')
+  .argument('<name>', 'Name of the JSON file of podcast')
+  .action(async (name) => {
+    const nameStripped = name
+      .replace(/\.json/i, '')
+      .toLowerCase()
+      .replace(/ /g, '-')
+      .replace(/[^a-z0-9-_]/g, '');
+
+    // copy template file
+    await copyFile(here('pod-template.json'), there(`${nameStripped}.json`));
+
+    // open file in editor
+    await open(there(`${nameStripped}.json`));
+
+    console.log(
+      `New podcast "${name}" created at "${there(`${nameStripped}.json`)}"`,
+    );
+  });
+
 await program.parseAsync();

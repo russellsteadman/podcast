@@ -20,6 +20,22 @@ npm install -g poddle
 
 ## Commands
 
+### `new`
+
+The `new` command will generate a new podcast JSON file in the current directory.
+
+```text
+Usage: poddle new [options] <name>
+
+Get a template for a new podcast
+
+Arguments:
+  name        Name of the JSON file of podcast
+
+Options:
+  -h, --help  display help for command
+```
+
 ### `create`
 
 Simply provide the file formatted with the poddle json schema. The `create` command will automatically prompt you for which voices to use for the podcast. You can also specify the voices using the `-H` and `-G` flags.

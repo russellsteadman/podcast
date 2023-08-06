@@ -1,0 +1,7 @@
+{
+  "$schema": "https://russell.run/poddlev1",
+  "title": "Example Title",
+  "lang": "es-MX",
+  "hostLang": "en-US",
+  "set": [["Hola", "Hello"]]
+}
